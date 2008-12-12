@@ -290,15 +290,19 @@
 (require 'find-recursive)
 (setq load-path (cons "/home/tkn/public/emacs-ruby-mode" load-path))
 (require 'ruby-mode)
-(setq load-path (cons "/home/tkn/public/emacs-rails" load-path))
-(require 'rails)
-(define-key rails-minor-mode-map (kbd "C-c C-RET") 'rails-goto-file-on-current-line)
-(define-key rails-minor-mode-map [C-return] 'newline-and-indent)
-(ruby-electric-mode)
-(add-hook 'ruby-mode-hook
-          #'(lambda ()
-              ;(ruby-electric-mode nil)
-              (local-set-key [tab] 'indent-selected-region-or-line)))
+(add-to-list 'auto-mode-alist
+             '("\\.rb$" . ruby-mode))
+
+;; (setq load-path (cons "/home/tkn/public/emacs-rails" load-path))
+;; (require 'rails)
+;; (define-key rails-minor-mode-map (kbd "C-c C-RET") 'rails-goto-file-on-current-line)
+;; (define-key rails-minor-mode-map [C-return] 'newline-and-indent)
+
+;; (add-hook 'ruby-mode-hook ; is this really rails-mode ?
+;;           (lambda ()
+;;             (ruby-electric-mode nil) ;; turn it off, please?
+;;             (local-set-key [tab] 'indent-selected-region-or-line)
+;;             ))
 
 ;; (add-hook 'after-init-hook
 ;;           (lambda ()
