@@ -292,6 +292,8 @@
 (require 'ruby-mode)
 (add-to-list 'auto-mode-alist
              '("\\.rb$" . ruby-mode))
+(add-to-list 'auto-mode-alist
+             '("\\.rhtml$" . ruby-mode))
 
 ;; (setq load-path (cons "/home/tkn/public/emacs-rails" load-path))
 ;; (require 'rails)
@@ -310,3 +312,19 @@
 
 (color-theme-charcoal-black)
 
+(defun jump-to-grep-match ()
+  (interactive)
+  (when (looking-at "^\\([^:]+\\):\\([0-9]+\\):.*$")
+    (let ( (file-name (match-string 1))
+           (line-number (string-to-number (match-string 2))))
+      (when (not (get-file-buffer file-name))
+        (find-file-noselect file-name))
+      (if (get-file-buffer file-name)
+          (and
+           (pop-to-buffer (get-file-buffer file-name))
+           (message (concat "goto-line -> " file-name))
+           (goto-line line-number))
+      ;;; else
+        (error (concat "can't pop to file: " file-name " line: " (number-to-string line-number)))
+        ))))
+;; (local-set-key [return] 'jump-to-grep-match)
