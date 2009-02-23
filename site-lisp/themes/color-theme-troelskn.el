@@ -50,6 +50,8 @@
   (let ((color-theme-is-cumulative t))
     (color-theme-install
      '(color-theme-charcoal-black-troelskn
+       ()
+       ()
        (default ((t (nil))))
 
        (modeline ((t (:background "#CCCCCC" :foreground "#333333" :box (:line-width 1 :style released-button)))))
@@ -62,9 +64,34 @@
        (tabbar-unselected ((t (:height 110 :background "#CCCCCC" :foreground "#333333" :bold nil :box (:line-width 1 :style released-button)))))
        (tabbar-button ((t (:height 110 :background "#CCCCCC" :foreground "#333333" :bold nil :box (:line-width 1 :style released-button)))))
 
-       (highlight ((t (:background "dark slate blue" :foreground "light blue"))))
+       (highlight ((t (:background "dark slate blue"))))
        (hl-line ((t (:background "#373250"))))
        (font-lock-string-face ((t (:foreground "#A6A" :background "#422842"))))
+       (font-lock-keyword-face ((t (:foreground "#729fcf" :bold t))))
+
+       (quack-pltish-comment-face ((t (:foreground "#888a85"))))
+       (quack-pltish-defn-face ((t (:foreground "#8ae234"))))
+       (quack-pltish-keyword-face ((t (:foreground "#729fcf" :bold t))))
+       (quack-pltish-paren-face ((t (:foreground "#666666"))))
+       (quack-pltish-selfeval-face ((t (:foreground "#ad7fa8"))))
+
+       (quack-threesemi-semi-face ((t (:foreground "#ccc" :background nil :bold t))))
+       (quack-threesemi-text-face ((t (:foreground "#ccc" :background nil :bold t))))
+
+
+       ;; tango begin
+;;;        (font-lock-builtin-face ((t (:foreground "#729fcf"))))
+;;;        (font-lock-comment-face ((t (:foreground "#888a85"))))
+;;;        (font-lock-constant-face ((t (:foreground "#8ae234"))))
+;;;        (font-lock-doc-face ((t (:foreground "#888a85"))))
+;;;        (font-lock-keyword-face ((t (:foreground "#729fcf" :bold t))))
+;;;        (font-lock-string-face ((t (:foreground "#ad7fa8" :italic t))))
+;;;        (font-lock-type-face ((t (:foreground "#8ae234" :bold t))))
+;;;        (font-lock-variable-name-face ((t (:foreground "#eeeeec"))))
+;;;        (font-lock-warning-face ((t (:bold t :foreground "#f57900"))))
+;;;        (font-lock-function-name-face ((t (:foreground "#edd400" :bold t :italic t))))
+       ;; tango end
+
        (flymake-errline ((t (:background "#800"))))
 
 ))))

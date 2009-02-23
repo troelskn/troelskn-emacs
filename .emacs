@@ -29,7 +29,7 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-;;;(prefer-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
 (defun revert-utf8 ()
   "Reverts the current buffer to utf-8"
   (interactive)
@@ -96,10 +96,10 @@
 ;; (set-face-foreground 'quack-pltish-selfeval-face "#008080")
 ;; (set-face-background 'quack-pltish-selfeval-face "#EDF8FF")
 
-
 ;; color-theme
 (require 'color-theme)
 (color-theme-initialize)
+(color-theme-charcoal-black)
 
 ;; customise matching parens
 (require 'paren)
@@ -169,9 +169,8 @@
 (global-set-key "\M-g" 'goto-line)
 (global-set-key '[67109053] 'comment-region)
 (global-set-key '[67109031] 'uncomment-region)
-(global-set-key [C-return] 'newline-and-indent)
-(global-set-key [(backtab)] 'dabbrev-expand)
-(global-set-key '[f5] 'php-lint)
+(global-set-key '[C-return] 'newline-and-indent)
+(global-set-key '[(backtab)] 'dabbrev-expand)
 (global-set-key [f8] 'other-window)
 (global-set-key [f9] 'delete-other-windows)
 (global-set-key [f12] 'revert-utf8)
@@ -290,19 +289,15 @@
 (require 'find-recursive)
 (setq load-path (cons "/home/tkn/public/emacs-ruby-mode" load-path))
 (require 'ruby-mode)
-(setq load-path (cons "/home/tkn/public/emacs-rails" load-path))
-(require 'rails)
-(define-key rails-minor-mode-map (kbd "C-c C-RET") 'rails-goto-file-on-current-line)
-(define-key rails-minor-mode-map [C-return] 'newline-and-indent)
-(ruby-electric-mode)
+
+;; (setq load-path (cons "/home/tkn/public/emacs-rails" load-path))
+;; (require 'rails)
+;; (define-key rails-minor-mode-map (kbd "C-c C-RET") 'rails-goto-file-on-current-line)
+;; (define-key rails-minor-mode-map [C-return] 'newline-and-indent)
+
 (add-hook 'ruby-mode-hook
           #'(lambda ()
-              ;(ruby-electric-mode nil)
+              (ruby-electric-mode nil)
               (local-set-key [tab] 'indent-selected-region-or-line)))
 
-;; (add-hook 'after-init-hook
-;;           (lambda ()
-;;             (color-theme-charcoal-black)))
-
-(color-theme-charcoal-black)
 
