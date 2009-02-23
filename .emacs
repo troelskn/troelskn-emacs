@@ -289,15 +289,39 @@
 (require 'find-recursive)
 (setq load-path (cons "/home/tkn/public/emacs-ruby-mode" load-path))
 (require 'ruby-mode)
+(add-to-list 'auto-mode-alist
+             '("\\.rb$" . ruby-mode))
+(add-to-list 'auto-mode-alist
+             '("\\.rhtml$" . ruby-mode))
 
 ;; (setq load-path (cons "/home/tkn/public/emacs-rails" load-path))
 ;; (require 'rails)
 ;; (define-key rails-minor-mode-map (kbd "C-c C-RET") 'rails-goto-file-on-current-line)
 ;; (define-key rails-minor-mode-map [C-return] 'newline-and-indent)
 
-(add-hook 'ruby-mode-hook
-          #'(lambda ()
-              (ruby-electric-mode nil)
-              (local-set-key [tab] 'indent-selected-region-or-line)))
+;; (add-hook 'ruby-mode-hook ; is this really rails-mode ?
+;; (lambda ()
+;; (ruby-electric-mode nil) ;; turn it off, please?
+;; (local-set-key [tab] 'indent-selected-region-or-line)
+;; ))
 
+;; (add-hook 'after-init-hook
+;; (lambda ()
+;; (color-theme-charcoal-black)))
 
+(defun jump-to-grep-match ()
+  (interactive)
+  (when (looking-at "^\\([^:]+\\):\\([0-9]+\\):.*$")
+    (let ( (file-name (match-string 1))
+           (line-number (string-to-number (match-string 2))))
+      (when (not (get-file-buffer file-name))
+        (find-file-noselect file-name))
+      (if (get-file-buffer file-name)
+          (and
+           (pop-to-buffer (get-file-buffer file-name))
+           (message (concat "goto-line -> " file-name))
+           (goto-line line-number))
+      ;;; else
+        (error (concat "can't pop to file: " file-name " line: " (number-to-string line-number)))
+        ))))
+;; (local-set-key [return] 'jump-to-grep-match)
