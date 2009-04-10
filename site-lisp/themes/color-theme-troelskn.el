@@ -169,3 +169,42 @@ string-background
      (info-xref ((t (:foreground "#729fcf"))))
      (info-xref-visited ((t (:foreground "#ad7fa8"))))
      )))
+
+(defun color-theme-scintilla-troelskn ()
+  ""
+  (interactive)
+  (color-theme-scintilla)
+  (let ((color-theme-is-cumulative t))
+    (color-theme-install
+     '(color-theme-scintilla-troelskn
+       nil
+       (default ((t (nil))))
+
+       (modeline ((t (:background "#CCCCCC" :foreground "#333333" :box (:line-width 1 :style released-button)))))
+       (mode-line-inactive ((t (:background "#CCCCCC" :foreground "#888888" :box (:line-width 1 :style released-button)))))
+       (mode-line-buffer-id ((t (:bold t :background "#CCCCCC" :foreground "#333333" :weight bold))))
+
+       (tabbar-default ((t (:height 110 :family "unknown-dejavu sans mono" :background "#CCC"))))
+       (tabbar-highlight ((t (:underline nil))))
+       (tabbar-selected ((t (:height 110 :background "#333333" :foreground "beige" :bold nil :color "beige" :box (:line-width 1 :style pressed-button)))))
+       (tabbar-unselected ((t (:height 110 :background "#CCCCCC" :foreground "#333333" :bold nil :box (:line-width 1 :style released-button)))))
+       (tabbar-button ((t (:height 110 :background "#CCCCCC" :foreground "#333333" :bold nil :box (:line-width 1 :style released-button)))))
+
+;;;        (highlight ((t (:background "dark slate blue"))))
+       (hl-line ((t (:background "#DDDDDD"))))
+       (font-lock-string-face ((t (:foreground "#FF39FF" :background "#FFE3FF" :weight normal))))
+;;;        (font-lock-keyword-face ((t (:foreground "#729fcf" :bold t))))
+
+;;;        (quack-pltish-comment-face ((t (:foreground "#888a85"))))
+;;;        (quack-pltish-defn-face ((t (:foreground "#8ae234"))))
+;;;        (quack-pltish-keyword-face ((t (:foreground "#729fcf" :bold t))))
+;;;        (quack-pltish-paren-face ((t (:foreground "#666666"))))
+;;;        (quack-pltish-selfeval-face ((t (:foreground "#ad7fa8"))))
+
+;;;        (quack-threesemi-semi-face ((t (:foreground "#ccc" :background nil :bold t))))
+;;;        (quack-threesemi-text-face ((t (:foreground "#ccc" :background nil :bold t))))
+
+
+       (flymake-errline ((t (:background "#800"))))
+
+))))
