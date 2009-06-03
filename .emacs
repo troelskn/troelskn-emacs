@@ -29,6 +29,10 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+;; open up some default buffers, so that they alwways appear in the same order
+(get-buffer-create "TAGS")
+(get-buffer-create "*Completions*")
+
 (prefer-coding-system 'utf-8)
 (defun revert-utf8 ()
   "Reverts the current buffer to utf-8"
