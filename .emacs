@@ -177,6 +177,10 @@
 
 (iswitchb-mode)
 
+;; etags
+(require 'etags-select)
+(global-set-key "\M-." 'etags-select-find-tag)
+
 ;; Add color to a shell running in emacs M-x shell
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
