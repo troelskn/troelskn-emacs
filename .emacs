@@ -30,7 +30,7 @@
 (put 'upcase-region 'disabled nil)
 
 ;; open up some default buffers, so that they alwways appear in the same order
-(get-buffer-create "TAGS")
+;;(get-buffer-create "TAGS")
 (get-buffer-create "*Completions*")
 
 (prefer-coding-system 'utf-8)
@@ -155,13 +155,31 @@
 (require 'tabbar)
 (tabbar-mode)
 
-;; @todo bind this to a shortcut, or perhaps a button on the tabbar
+;; TODO: bind this to a shortcut, or perhaps a button on the tabbar
 (defun tabbar-buffer-groups-switch-mode ()
   "Switches mode between displaying all tabs, or by group"
   (setq tabbar-buffer-groups-function
         (if (eq tabbar-buffer-groups-function 'tabbar-buffer-groups)
           (lambda () (list "All buffers"))
           'tabbar-buffer-groups)))
+
+(setq tabbar-buffer-list-function
+      (lambda ()
+        (delq nil
+              (mapcar #'(lambda (b)
+                          (cond
+                           ;; Always include the current buffer.
+                           ((eq (current-buffer) b) b)
+                           ;; remove TAGS buffers
+                           ((string-equal "TAGS" (substring (buffer-name b) 0 4)) nil)
+                           ;; include buffers for files
+                           ((buffer-file-name b) b)
+                           ;; dunno what this is ...
+                           ((char-equal ?\  (aref (buffer-name b) 0)) nil)
+                           ;; or this ...
+                           ((buffer-live-p b) b)))
+                      (buffer-list)))))
+
 (tabbar-buffer-groups-switch-mode)
 
 ;; compatibility with gnome terminal
