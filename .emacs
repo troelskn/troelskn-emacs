@@ -33,6 +33,9 @@
 ;;(get-buffer-create "TAGS")
 (get-buffer-create "*Completions*")
 
+;; some random utils
+(require 'troelskn-utilities)
+
 (prefer-coding-system 'utf-8)
 (defun revert-utf8 ()
   "Reverts the current buffer to utf-8"
