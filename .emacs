@@ -210,6 +210,37 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+;; http://www.emacswiki.org/emacs/EtagsSelect
+(defun jds-find-tags-file ()
+  "recursively searches each parent directory for a file named 'TAGS' and returns the
+path to that file or nil if a tags file is not found. Returns nil if the buffer is
+not visiting a file"
+  (progn
+    (defun find-tags-file-r (path)
+      "find the tags file from the parent directories"
+      (let* ((parent (file-name-directory path))
+             (possible-tags-file (concat parent "TAGS")))
+        (cond
+         ((file-exists-p possible-tags-file) (throw 'found-it possible-tags-file))
+         ((string= "/TAGS" possible-tags-file) (throw 'found-it nil)) ; we found nothing
+         (t (find-tags-file-r (directory-file-name parent))))))
+    (if (buffer-file-name)
+        (catch 'found-it
+          (find-tags-file-r (buffer-file-name))))))
+
+(defun jds-set-tags-file-path ()
+  "calls `jds-find-tags-file' to recursively search up the directory tree to find
+a file named 'TAGS'. If found, set 'tags-table-list' with that path as an argument
+otherwise raises an error."
+  (interactive)
+  (let ((tags-file (jds-find-tags-file)))
+    (if tags-file
+        (setq tags-table-list (list tags-file)))))
+
+;; ;; delay search the TAGS file after open the source file
+(add-hook 'emacs-startup-hook
+          '(lambda () (jds-set-tags-file-path)))
+
 (require 'w3m-load)
 
 ;; Language modes & modifications
