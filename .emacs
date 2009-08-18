@@ -174,7 +174,10 @@
                            ;; Always include the current buffer.
                            ((eq (current-buffer) b) b)
                            ;; remove TAGS buffers
-                           ((string-equal "TAGS" (substring (buffer-name b) 0 4)) nil)
+                           ((and
+                             (>= (length (buffer-name b)) 4)
+                             (string-equal "TAGS" (substring (buffer-name b) 0 4)))
+                            nil)
                            ;; include buffers for files
                            ((buffer-file-name b) b)
                            ;; dunno what this is ...
@@ -385,3 +388,37 @@ otherwise raises an error."
         (error (concat "can't pop to file: " file-name " line: " (number-to-string line-number)))
         ))))
 ;; (local-set-key [return] 'jump-to-grep-match)
+
+(defun snippet-php-constructor ()
+  "PHP-snippet. Expands a list of variables to a default constructor."
+  (interactive)
+  (if mark-active
+      (let
+          ((selection-text (buffer-substring (region-beginning) (region-end)))
+           (variables '())
+           (begin (region-beginning))
+           (end (region-end)))
+        (save-excursion
+          (save-restriction
+            (narrow-to-region (region-beginning) (region-end))
+            (goto-char (point-min))
+            (while (re-search-forward "$\\([a-z0-9_-]+\\)" nil t)
+              (setq variables (append variables (list (match-string 1)))))))
+        (if variables
+            (save-excursion
+              (goto-char end)
+              (insert (concat ") {\n"
+                              (mapconcat
+                               (function (lambda (varname) (concat "    $this->" varname " = $" varname ";\n")))
+                               variables
+                               "")
+                              "  }\n"))
+              (goto-char begin)
+              (insert (concat
+                       (mapconcat
+                        (function (lambda (varname) (concat "  protected $" varname ";\n")))
+                        variables
+                        "")
+                       "  function __construct(")))
+          (message "no variables in selection")))
+    (message "no active mark")))
