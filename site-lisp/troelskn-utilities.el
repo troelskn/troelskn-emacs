@@ -30,3 +30,29 @@
                                      (downcase (match-string 0 s)))
                              t nil s)))
     (downcase s)))
+
+(defun dasherize (s &optional start)
+  (underscore s "-" start))
+
+(defun camelize-buffer-or-region ()
+  (interactive)
+  (if (y-or-n-p "Select 'y' for methodStyle or 'n' for ClassStyle ")
+      (replace-regexp
+       "\\b\\([a-z]+_[a-z]+[a-z_]*\\|[a-z]+-[a-z]+[a-z-]*\\)\\b"
+       '(replace-eval-replacement replace-quote (camelize-method (match-string 0))))
+    (replace-regexp
+     "\\b\\([a-z]+_[a-z]+[a-z_]*\\|[a-z]+-[a-z]+[a-z-]*\\)\\b"
+     '(replace-eval-replacement replace-quote (camelize (match-string 0))))))
+
+(defun underscore-buffer-or-region ()
+  (interactive)
+  (replace-regexp
+    "\\b\\([a-z]*[A-Z][a-z]+\\)+\\b"
+    '(replace-eval-replacement replace-quote (underscore (match-string 0)))))
+
+(defun dasherize-buffer-or-region ()
+  (interactive)
+  (replace-regexp
+    "\\b\\([a-z]*[A-Z][a-z]+\\)+\\b"
+    '(replace-eval-replacement replace-quote (dasherize (match-string 0)))))
+
