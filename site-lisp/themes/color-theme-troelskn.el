@@ -53,9 +53,10 @@
        nil
        (default ((t (nil))))
 
-       (modeline ((t (:background "#CCCCCC" :foreground "#333333" :box (:line-width 1 :style released-button)))))
+       (modeline ((t (:height 110 :background "#CCCCCC" :foreground "#333333" :box (:line-width 1 :style released-button)))))
        (mode-line-inactive ((t (:background "#CCCCCC" :foreground "#888888" :box (:line-width 1 :style released-button)))))
-       (mode-line-buffer-id ((t (:bold t :background "#CCCCCC" :foreground "#333333" :weight bold))))
+       (mode-line-buffer-id ((t (:height 110 :bold t :background "#CCCCCC" :foreground "#333333" :weight bold))))
+       ;(minibuffer-prompt ((t (:height 220))))
 
        (tabbar-default ((t (:height 110 :family "unknown-dejavu sans mono" :background "#CCC"))))
        (tabbar-highlight ((t (:underline nil))))

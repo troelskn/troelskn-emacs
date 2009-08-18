@@ -106,7 +106,7 @@
 ;; color-theme
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-charcoal-black)
+(color-theme-charcoal-black-troelskn)
 
 ;; customise matching parens
 (require 'paren)
@@ -353,6 +353,8 @@ otherwise raises an error."
              '("\\.rb$" . ruby-mode))
 (add-to-list 'auto-mode-alist
              '("\\.rhtml$" . ruby-mode))
+(add-to-list 'auto-mode-alist
+             '("\\.erb$" . ruby-mode))
 
 ;; (setq load-path (cons "/home/tkn/public/emacs-rails" load-path))
 ;; (require 'rails)
