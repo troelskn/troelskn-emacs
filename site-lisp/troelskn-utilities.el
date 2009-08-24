@@ -56,3 +56,10 @@
     "\\b\\([a-z]*[A-Z][a-z]+\\)+\\b"
     '(replace-eval-replacement replace-quote (dasherize (match-string 0)))))
 
+(defun shift-region-right (arg)
+  (interactive "*p")
+  (indent-rigidly (region-beginning) (region-end) 1))
+
+(defun shift-region-left (arg)
+  (interactive "*p")
+  (indent-rigidly (region-beginning) (region-end) -1))
