@@ -1,7 +1,6 @@
 ;; troels' dot-emacs-file
 
 (add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'load-path "~/.emacs.d/emacs-w3m")
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
 (setq inhibit-startup-message t)
@@ -244,8 +243,6 @@ otherwise raises an error."
 (add-hook 'emacs-startup-hook
           '(lambda () (jds-set-tags-file-path)))
 
-(require 'w3m-load)
-
 ;; Language modes & modifications
 
 (require 'lua-mode)
@@ -253,9 +250,6 @@ otherwise raises an error."
 ;; PHP
 ;(autoload 'php-mode "php-mode" "Major mode for PHP Scripts." t)
 (require 'php-mode)
-
-;; Use w3m to browse the php-manual
-;(setq php-browse-url 'w3m-browse-url)
 
 ;; Define function documentation function
 (defun php-manual-lookup ()
