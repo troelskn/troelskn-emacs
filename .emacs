@@ -247,6 +247,8 @@ otherwise raises an error."
 
 (require 'lua-mode)
 
+(require 'markdown-mode)
+
 ;; PHP
 ;(autoload 'php-mode "php-mode" "Major mode for PHP Scripts." t)
 (require 'php-mode)
