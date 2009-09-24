@@ -40,6 +40,10 @@
   "Reverts the current buffer to utf-8"
   (interactive)
   (revert-buffer-with-coding-system 'utf-8))
+(defun revert-latin1 ()
+  "Reverts the current buffer to iso-8859-1"
+  (interactive)
+  (revert-buffer-with-coding-system 'iso-8859-1))
 
 ;; font-lock settings
 (global-font-lock-mode t)
@@ -303,6 +307,17 @@ otherwise raises an error."
               (c-set-offset 'arglist-close 0)
               (c-set-offset 'defun-close 0)
               (setq abbrev-mode nil)))
+
+(defun my-set-tab-width (w)
+  (interactive "nWidth:")
+  "Sets the tab with locally .. This is a hack, and probably unnescesary, if I knew what I were doing"
+  (set (make-local-variable 'tab-stop-list)
+       (my-build-tab-stop-list w))
+  (setq c-basic-offset w)
+  (c-set-offset 'defun-block-intro w)
+  (c-set-offset 'arglist-intro w)
+  (setq standard-indent w)
+  (setq default-tab-width w))
 
 ;; Set default types
 (add-to-list 'auto-mode-alist
