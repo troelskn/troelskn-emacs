@@ -154,6 +154,12 @@
 (autoload 'highlight-current-line "highlight-current-line")
 
 ;; textpad-mode
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+
+
+;; textpad-mode
 (require 'textpad)
 (textpad-mode)
 
@@ -256,6 +262,7 @@ otherwise raises an error."
 ;; PHP
 ;(autoload 'php-mode "php-mode" "Major mode for PHP Scripts." t)
 (require 'php-mode)
+(require 'smarty-mode)
 
 ;; Define function documentation function
 (defun php-manual-lookup ()
