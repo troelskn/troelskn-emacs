@@ -6,7 +6,7 @@
 (setq inhibit-startup-message t)
 (setq-default indent-tabs-mode nil)
 (setq standard-indent 2)
-(setq default-tab-width 2)
+(setq tab-width 2)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (show-paren-mode 1)
@@ -28,7 +28,7 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-;; open up some default buffers, so that they alwways appear in the same order
+;; open up some default buffers, so that they always appear in the same order
 ;;(get-buffer-create "TAGS")
 (get-buffer-create "*Completions*")
 
@@ -262,7 +262,6 @@ otherwise raises an error."
 ;; PHP
 ;(autoload 'php-mode "php-mode" "Major mode for PHP Scripts." t)
 (require 'php-mode)
-(require 'smarty-mode)
 
 ;; Define function documentation function
 (defun php-manual-lookup ()
@@ -324,7 +323,12 @@ otherwise raises an error."
   (c-set-offset 'defun-block-intro w)
   (c-set-offset 'arglist-intro w)
   (setq standard-indent w)
-  (setq default-tab-width w))
+  (setq tab-width w))
+
+(setq cssm-indent-level 2)
+(setq cssm-newline-before-closing-bracket t)
+(setq cssm-indent-function #'cssm-c-style-indenter)
+(setq cssm-mirror-mode nil)
 
 ;; Set default types
 (add-to-list 'auto-mode-alist
@@ -442,3 +446,15 @@ otherwise raises an error."
                        "  function __construct(")))
           (message "no variables in selection")))
     (message "no active mark")))
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(browse-url-browser-function (quote browse-url-firefox)))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
